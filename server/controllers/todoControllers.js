@@ -2,7 +2,7 @@ const todoModel = require('../models/todoModel.js');
 
 module.exports.listTodos = (req, res) => {
   const todosList = todoModel.list();
-  res.send(todosList);
+  res.status(200).send(todosList);
 };
 
 module.exports.findTodo = (req, res) => {
@@ -14,7 +14,7 @@ module.exports.findTodo = (req, res) => {
       message: `No todo with the id ${id}`,
     });
   }
-  res.send(todo);
+  res.status(200).send(todo);
 };
 
 module.exports.createTodo = (req, res) => {
@@ -24,7 +24,7 @@ module.exports.createTodo = (req, res) => {
   }
 
   const newTodo = todoModel.create(task);
-  res.send(newTodo);
+  res.status(201).send(newTodo);
 };
 
 module.exports.updateTodo = (req, res) => {
@@ -43,7 +43,7 @@ module.exports.updateTodo = (req, res) => {
     });
   }
 
-  res.send(updatedTodo);
+  res.status(200).send(updatedTodo);
 };
 
 module.exports.deleteTodo = (req, res) => {
