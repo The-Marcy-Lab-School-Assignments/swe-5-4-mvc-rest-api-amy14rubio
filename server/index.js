@@ -43,13 +43,13 @@ const listTodos = (req, res) => {
 const findTodo = (req, res) => {
   const { id } = req.params;
   const todo = todos.find((todo) => todo.id === Number(id));
-  if (!todo) res.status(404).send({ message: `No todo with the id ${id}` });
+  if (!todo) return res.status(404).send({ message: `No todo with the id ${id}` });
   res.status(200).send(todo);
 };
 
 const createTodo = (req, res) => {
   const { task } = req.body;
-  if (!task) res.status(400).send({ message: `Invalid task` });
+  if (!task) return res.status(400).send({ message: `Invalid task` });
   const newTodo = { id: getId(), task: task, isDone: false };
   todos.push(newTodo);
   res.status(201).send(newTodo);
@@ -57,9 +57,10 @@ const createTodo = (req, res) => {
 
 const updateTodo = (req, res) => {
   const { isDone } = req.body;
+  if (isDone === null) return res.status(400).send({ message: `No todo with the id ${id}` });
   const { id } = req.params;
   const todo = todos.find((todo) => todo.id === Number(id));
-  if (!todo) res.status(404).send({ message: `No todo with the id ${id}` });
+  if (!todo) return res.status(404).send({ message: `No todo with the id ${id}` });
   todo.isDone = Boolean(isDone);
   res.status(200).send(todo);
 };
@@ -67,7 +68,7 @@ const updateTodo = (req, res) => {
 const deleteTodo = (req, res) => {
   const { id } = req.params;
   const index = todos.findIndex((todo) => todo.id === Number(id));
-  if (index < 0) res.status(404).send({ message: `No todo with the id ${id}` });
+  if (index < 0) return res.status(404).send({ message: `No todo with the id ${id}` });
   todos.splice(index, 1);
   res.sendStatus(204);
 };
@@ -82,9 +83,9 @@ app.post('/api/todos', createTodo);
 app.patch('/api/todos/:id', updateTodo);
 app.delete('/api/todos/:id', deleteTodo);
 
-app.use((req, res) => {
-  // res.status(404).send({ error: `Error: Not found ${req.originalUrl}` });
-  res.status(404).sendFile('index.html', { root: pathToFrontend });
+app.get('*', (req, res, next) => {
+  if (req.originalUrl.startsWith('/api')) return next();
+  res.sendFile(pathToFrontend + '/index.html');
 });
 
 const port = 8080;
