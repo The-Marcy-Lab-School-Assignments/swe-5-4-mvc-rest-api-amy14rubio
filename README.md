@@ -1,6 +1,6 @@
 # swe-5-5-mvc-rest-api
 
-Deployment Link: <<<<<< PUT YOUR DEPLOYMENT LINK HERE >>>>>>
+Deployment Link: [https://swe-5-4-mvc-rest-api-amy14rubio.onrender.com/](https://swe-5-4-mvc-rest-api-amy14rubio.onrender.com/)
 
 In this assignment, you will build a **Todo Tracker** REST API in two parts:
 
@@ -10,10 +10,12 @@ In this assignment, you will build a **Todo Tracker** REST API in two parts:
 A fully functional frontend is already provided. Your job is to build the server that powers it.
 
 Refer to the associated lessons for support:
-* [RESTful CRUD APIs](https://marcylabschool.gitbook.io/marcy-lab-school-docs/mod-5-servers/7-rest-crud-api)
-* [Model-View-Controller Architecture](https://marcylabschool.gitbook.io/marcy-lab-school-docs/mod-5-servers/8-model-view-controller)
+
+- [RESTful CRUD APIs](https://marcylabschool.gitbook.io/marcy-lab-school-docs/mod-5-servers/7-rest-crud-api)
+- [Model-View-Controller Architecture](https://marcylabschool.gitbook.io/marcy-lab-school-docs/mod-5-servers/8-model-view-controller)
 
 **Table of Contents**
+
 - [Setup](#setup)
 - [Short Response Questions](#short-response-questions)
 - [Part 1 — RESTful CRUD API](#part-1--restful-crud-api)
@@ -117,10 +119,11 @@ Every todo has this shape: `{ id: Number, task: String, isDone: Boolean }`
 | POST   | `/api/todos`     | `{ task: String }`    | 201, new todo       | 400 if `task` missing |
 | PATCH  | `/api/todos/:id` | `{ isDone: Boolean }` | 200, updated todo   | 404 if not found      |
 | DELETE | `/api/todos/:id` | —                     | 204, no content     | 404 if not found      |
-| *      | *                | —                     | —                   | 404                   |
+| \*     | \*               | —                     | —                   | 404                   |
 
 Notice the REST conventions reflected in this contract:
-- **Resource-based URLs** — `/api/todos` and `/api/todos/:id` identify the *resource*, not the action (e.g. not `/api/getTodos` or `/api/deleteTodo`)
+
+- **Resource-based URLs** — `/api/todos` and `/api/todos/:id` identify the _resource_, not the action (e.g. not `/api/getTodos` or `/api/deleteTodo`)
 - **HTTP methods express the action** — `GET` reads, `POST` creates, `PATCH` updates, `DELETE` removes
 - **Status codes communicate the result** — `201` for created, `204` for no content, `400` for bad input, `404` for not found
 
@@ -144,6 +147,7 @@ git commit -m "Part 1: monolithic Todo API"
 ### Part 2 Grading
 
 Your grade on Part 2 will be determined by the number of requirements you complete. Part 2 has 7 requirements:
+
 - 2 model requirements
 - 2 controller requirements
 - 2 index.js requirements
@@ -272,12 +276,12 @@ Then add the deployed link to the top of this README.
 
 The following error codes are commonly used by APIs:
 
-* Success Responses
-  * `200` OK — Standard success (GET, PATCH).
-  * `201` Created — Resource was created (POST).
-  * `204` No Content — Successful but no response body (DELETE).
-* Client Errors
-  * `400` Bad Request — Input is invalid (e.g. missing required field).
-  * `404` Not Found — Resource doesn't exist (e.g. id not found).
-* Server Errors
-  * `500` Internal Server Error — Unexpected error on your backend.
+- Success Responses
+  - `200` OK — Standard success (GET, PATCH).
+  - `201` Created — Resource was created (POST).
+  - `204` No Content — Successful but no response body (DELETE).
+- Client Errors
+  - `400` Bad Request — Input is invalid (e.g. missing required field).
+  - `404` Not Found — Resource doesn't exist (e.g. id not found).
+- Server Errors
+  - `500` Internal Server Error — Unexpected error on your backend.
